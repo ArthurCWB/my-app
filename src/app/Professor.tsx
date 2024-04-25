@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ProfessorMateria from "./ProfessorMateria";
 
 export default function Professor() {
   const [nome, setNome] = useState("");
@@ -10,11 +11,11 @@ export default function Professor() {
 
   const getListProfessor = async(nome:any) => {
     try {
-        const {data} = await axios.get('http://192.168.15.172:3030/professorDaMateria', { params: { nome }})
-        setListProfessor(data);
-    }
+        const {data} = await axios.get('http://192.168.15.172:3030/professor', { params: { nome }})
+       setListProfessor(data);
+    } 
     catch (error) {
-        console.error('erro ao tentar listar professor', error)
+        console.log('erro ao tentar listar professor', error)
     }
   }
 
@@ -29,7 +30,7 @@ export default function Professor() {
       );
       return data;
     } catch (error) {
-      console.log("algo deu errado ao executar funtion", error);
+      console.log("algo deu errado ao executar function", error);
       return [];
     }
   };
@@ -62,8 +63,12 @@ export default function Professor() {
       <br />
       {listProfessor.map((teacher: any, index) => (
         <div key={index}>
-          {teacher.professor?.nome ?? ""}
-          {teacher.materium.nome}
+          {teacher.nome}
+          
+          {teacher.materium.map((materia:any) => (
+            <li>{materia.nome}</li>
+          ))}
+          {/* {teacher.materium.nome} */}
         </div>
       ))}
       <input
@@ -74,9 +79,7 @@ export default function Professor() {
         onChange={(e) => setNomeBuscar(e.target.value)}
       />
     
-      <button onClick={() => getListProfessor(nomeBuscar)} className="myButton">
-        Buscar
-      </button>
+
     </>
   );
 }
