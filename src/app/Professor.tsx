@@ -57,7 +57,7 @@ export default function Professor() {
         onClick={() => createTeacher(nome, idade)}
         className="buttonCreate"
       >
-        cadastrar
+        Cadastrar
       </button>
       <br />
       <br />
