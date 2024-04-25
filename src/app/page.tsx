@@ -5,6 +5,7 @@ import Materia from "./Materia";
 import Professor from "./Professor";
 import ProfessorMateria from "./ProfessorMateria";
 
+
 function Home() {
   return (
     <>
